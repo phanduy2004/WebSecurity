@@ -2,6 +2,7 @@ package com.group8.alomilktea.config.security;
 
 import com.group8.alomilktea.entity.Roles;
 import com.group8.alomilktea.entity.User;
+import groovy.util.logging.Log;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -77,6 +78,8 @@ public class AuthUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
+
+
         return true;
     }
 
@@ -94,6 +97,9 @@ public class AuthUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+    
+    @Override
+    public String toString() {  return "a";}
 
 
 
