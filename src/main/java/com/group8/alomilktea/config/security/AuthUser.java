@@ -97,9 +97,9 @@ public class AuthUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    
+
     @Override
-    public String toString() {  return "a";}
+    public String toString() {  return "123123123a";}
 
 
 
