@@ -37,14 +37,13 @@ public class AuthHelper implements UserDetailsService {
         }
         else
         {
-            throw new DisabledException("User is not enabled");
+            throw new DisabledException("User is not enabled qưertyujhcxvhjcxc");
         }
 
 //
 
     }
 
-    private Collection<? extends GrantedAuthority> mapRoleToAuth(Set<Roles> roles) {
-        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole().getRoleName())).collect(Collectors.toList());
-    }
+
+
 }
