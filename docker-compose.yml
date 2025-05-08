@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: billyshop2
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./billyshop.sql:/docker-entrypoint-initdb.d/billyshop.sql
+    networks:
+      - app-network
+
+  app:
+    image: billyshop  # Thay bằng image của ứng dụng Spring Boot của bạn
+    container_name: billy-spring-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container:3306/billyshop2
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456
+    ports:
+      - "8888:8888"
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
