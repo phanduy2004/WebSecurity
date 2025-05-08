@@ -37,7 +37,7 @@ public class AuthHelper implements UserDetailsService {
         }
         else
         {
-            throw new DisabledException("User is not enabled hungg");
+            throw new DisabledException("User is not enabled VanHung12314");
         }
 
 //
