@@ -98,9 +98,6 @@ public class AuthUser implements UserDetails {
         return true;
     }
 
-    @Override
-    public String toString() {  return "12345678910";}
-
 
 
 }
