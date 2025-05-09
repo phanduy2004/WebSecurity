@@ -76,6 +76,41 @@
 
     return "admin/products/apps-ecommerce-product-list";
     }
+        @RequestMapping("/listProduct")
+        public List<Product> showProductList1(ModelMap model,
+                                      @RequestParam(name = "page", defaultValue = "0") int page,
+                                      @RequestParam(name = "size", defaultValue = "10") int size) {
+
+            Page<Product> productPage = productService.getAll(PageRequest.of(page, size));
+            List<Product> products = productPage.getContent();
+
+            Map<Integer, String> productCategoryMap = products.stream()
+                    .collect(Collectors.toMap(
+                            Product::getProId,
+                            product -> {
+                                String categoryName = productService.getCategoryNameByProductId(product.getProId());
+                                return categoryName != null ? categoryName : "No Category";
+                            }));
+
+            Map<Integer, String> productPromotionMap = products.stream()
+                    .collect(Collectors.toMap(
+                            Product::getProId,
+                            product -> {
+                                String promotionName = productService.getPromotionNameByProductId(product.getProId());
+                                return promotionName != null ? promotionName : "No Promotion";
+                            }));
+
+            model.addAttribute("products", products);
+            model.addAttribute("productCategoryMap", productCategoryMap);
+            model.addAttribute("productPromotionMap", productPromotionMap);
+
+            model.addAttribute("currentPage", page);
+            model.addAttribute("totalPages", productPage.getTotalPages());
+            model.addAttribute("totalItems", productPage.getTotalElements());
+            model.addAttribute("pageSize", size);
+
+            return products;
+        }
 
     @GetMapping("/details/{id}")
     public String getProductDetails(@PathVariable Integer id, Model model) {
