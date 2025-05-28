@@ -8,6 +8,17 @@ spring:
     show-sql: true
 server:
   port: ${API_PORT}
+  ssl:
+    enabled: true
+    key-store: classpath:bilishop.jks
+    key-store-password: BilishopTLS@2025
+    key-password: BilishopTLS@2025
+    key-store-type: JKS
+    key-alias: bilishop
+  servlet:
+    session:
+      cookie:
+        same-site: strict
 
 payment:
   vnPay:
